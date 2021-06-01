@@ -5,6 +5,13 @@
     "require": {
         "tecnickcom/tcpdf": "^6.4"
     },
+    "autoload": {
+        "psr-4": {
+            "Quintlab\\GmoLabel\\": [
+                "src/php"
+            ]
+        }
+    },
     "authors": [
         {
             "name": "Ole Trenner",
