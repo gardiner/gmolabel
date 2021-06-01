@@ -1,0 +1,14 @@
+{
+    "name": "quintlab/gmolabels",
+    "description": "Generator for printable qr codes to label gmo (genetically modified organisms)",
+    "type": "project",
+    "require": {
+        "tecnickcom/tcpdf": "^6.4"
+    },
+    "authors": [
+        {
+            "name": "Ole Trenner",
+            "email": "ole@jayotee.de"
+        }
+    ]
+}
