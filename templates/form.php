@@ -36,14 +36,14 @@
         <h2>GMO Label</h2>
         <form enctype="multipart/form-data" method="POST">
             <fieldset>
-                <label>CSV Datei</label>
+                <label>CSV File</label>
                 <input type="file" name="csvfile">
             </fieldset>
 
             <fieldset>
-                <label>Template-Vorlage</label>
+                <label>Label Template</label>
                 <select name="definition">
-                    <option>Bitte wählen...</option>
+                    <option>Please select…</option>
                     <?php foreach ($definitions as $definition): ?>
                         <option value="<?= htmlspecialchars($definition['title']) ?>"><?= htmlspecialchars($definition['title']) ?></option>
                     <?php endforeach; ?>
@@ -51,7 +51,7 @@
             </fieldset>
 
             <fieldset>
-                <button type="submit">Jetzt erstellen…</button>
+                <button type="submit">Generate labels</button>
             </fieldset>
         </form>
     </body>
