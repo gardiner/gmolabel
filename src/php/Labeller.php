@@ -9,11 +9,13 @@ class Labeller {
     protected $values;
     protected $definition;
     protected $debug;
+    protected $firstrow;
 
-    public function __construct(array $definition, array $values=null, bool $debug=false) {
+    public function __construct(array $definition, array $values=null, bool $debug=false, int $firstrow=0) {
         $this->definition = $definition;
         $this->values = $values ?? array();
         $this->debug = $debug;
+        $this->firstrow = max($firstrow, 0); //zero based, ie top row on page is 0
     }
 
     public function save_labels($filename) {
@@ -30,6 +32,8 @@ class Labeller {
         $def = $this->definition;
         $margins = $def['margins'];
         $fontsize = $def['fontsize'] ?? 9;
+        $maxcols = $def['labels_per_row'];
+        $maxrows = $def['labels_per_page'] / $def['labels_per_row'];
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
@@ -56,7 +60,7 @@ class Labeller {
 
         $counter = 0;
         $cx = 0;
-        $cy = 0;
+        $cy = min($this->firstrow, $maxrows - 1); //prevent firstrow from exceeding maxrows
         foreach($this->values as $value) {
             $content = implode(';', $value);
 
@@ -83,8 +87,8 @@ class Labeller {
 
             $counter ++;
             $cx ++;
-            if ($cx >= $this->definition['labels_per_row']) {
-                if (($cx * $cy) > $this->definition['labels_per_page']) {
+            if ($cx >= $maxcols) {
+                if ($cy == ($maxrows - 1)) {
                     $pdf->AddPage();
                     $cx = 0;
                     $cy = 0;

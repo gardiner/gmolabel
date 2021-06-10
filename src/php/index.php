@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //form submission
 
     $definition = Definitions::get_definition($_POST['definition'] ?? null);
+    $firstrow = (int)($_POST['firstrow'] ?? 1) - 1;
     $values = null;
     if (isset($_FILES["csvfile"]["error"]) && $_FILES["csvfile"]["error"] == UPLOAD_ERR_OK) {
         $tmp = $_FILES["csvfile"]["tmp_name"];
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         throw new \Exception('Invalid submission - missing file');
     }
 
-    $l = new Labeller($definition, $values, false);
+    $l = new Labeller($definition, $values, false, $firstrow);
     $l->send_labels_to_browser('gmolabel.pdf');
 
 } else {

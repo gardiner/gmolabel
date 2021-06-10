@@ -51,6 +51,11 @@
             </fieldset>
 
             <fieldset>
+                <label>Optional: Start in label row (default: 1)</label>
+                <input type="number" name="firstrow" value="1" placeholder="Label row">
+            </fieldset>
+
+            <fieldset>
                 <button type="submit">Generate labels</button>
             </fieldset>
         </form>
