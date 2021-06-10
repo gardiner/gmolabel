@@ -9,7 +9,6 @@ class Labeller {
     protected $values;
     protected $definition;
     protected $debug;
-    protected $fontsize = 9.5;
 
     public function __construct(array $definition, array $values=null, bool $debug=false) {
         $this->definition = $definition;
@@ -30,6 +29,7 @@ class Labeller {
     protected function create_labels() {
         $def = $this->definition;
         $margins = $def['margins'];
+        $fontsize = $def['fontsize'] ?? 9;
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
@@ -39,7 +39,7 @@ class Labeller {
         // set margins
         $pdf->SetMargins($margins['left'], $margins['top'], $margins['right']);
         $pdf->SetAutoPageBreak(true, $margins['bottom']);
-        $pdf->SetFont('helvetica', '', $this->fontsize);
+        $pdf->SetFont('helvetica', '', $fontsize);
         $pdf->SetLineStyle(array('width' => 0.005));
         $pdf->SetPrintHeader(false);
         $pdf->SetPrintFooter(false);
@@ -75,7 +75,7 @@ class Labeller {
 
             } elseif ($def['layout'] == 'rows') {
 
-                $size = $def['label_height'] - (3 * $def['label_padding']) - $this->point_to_mm($this->fontsize);
+                $size = $def['label_height'] - (3 * $def['label_padding']) - $this->point_to_mm($fontsize);
                 $pdf->write2DBarcode($content, $codetype, $x + $def['label_padding'], $y + $def['label_padding'], $size, $size, $codestyle, 'T');
                 $pdf->Text($x + $def['label_padding'], $y + $size + $def['label_padding'], $value['T_number']);
 
