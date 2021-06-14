@@ -71,17 +71,29 @@ class Labeller {
                 $pdf->RoundedRect($x, $y, $def['label_width'], $def['label_height'], 1.5);
             }
 
+            $texts = array();
+            if (!empty($value['T_number'])) {
+                $texts[] = $value['T_number'];
+            }
+            if (!empty($value['more_text'])) {
+                $texts[] = $value['more_text'];
+            }
+
             if ($def['layout'] == 'columns') {
 
                 $size = $def['label_height'] - (2 * $def['label_padding']);
                 $pdf->write2DBarcode($content, $codetype, $x + $def['label_padding'], $y + $def['label_padding'], $size, $size, $codestyle, 'T');
-                $pdf->Text($x + $size + $def['label_padding'], $y, $value['T_number']);
+                while ($text = array_shift($texts)) {
+                    $pdf->Text($x + $size + $def['label_padding'], $y, $text);
+                    $y += $this->point_to_mm($fontsize);
+                }
 
             } elseif ($def['layout'] == 'rows') {
 
+                $text = implode(' ', $texts);
                 $size = $def['label_height'] - (3 * $def['label_padding']) - $this->point_to_mm($fontsize);
                 $pdf->write2DBarcode($content, $codetype, $x + $def['label_padding'], $y + $def['label_padding'], $size, $size, $codestyle, 'T');
-                $pdf->Text($x + $def['label_padding'], $y + $size + $def['label_padding'], $value['T_number']);
+                $pdf->Text($x + $def['label_padding'], $y + $size + $def['label_padding'], $text);
 
             }
 

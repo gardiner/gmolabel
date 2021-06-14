@@ -45,7 +45,7 @@ class Definitions {
                 'labels_per_page' => 96,
                 'gap_left' => 4,
                 'gap_top' => 4,
-                'fontsize' => 9,
+                'fontsize' => 7,
 
                 'margins' => array(
                     'top' => 6,
