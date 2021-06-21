@@ -18,14 +18,14 @@ class Definitions {
                 'title' => 'Avery Zweckform 18x10mm (transparent foil)',
                 'layout' => 'columns',
 
-                'label_height' => 10,
+                'label_height' => 9.7,
                 'label_width' => 17.45,
-                'label_padding' => 1,
+                'label_padding' => 1.2,
                 'labels_per_row' => 10,
                 'labels_per_page' => 270,
                 'gap_left' => 2.9,
-                'gap_top' => 0,
-                'fontsize' => 6,
+                'gap_top' => 0.3,
+                'fontsize' => 5.5,
 
                 'margins' => array(
                     'top' => 12.7,

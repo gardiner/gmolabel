@@ -84,7 +84,7 @@ class Labeller {
                 $size = $def['label_height'] - (2 * $def['label_padding']);
                 $pdf->write2DBarcode($content, $codetype, $x + $def['label_padding'], $y + $def['label_padding'], $size, $size, $codestyle, 'T');
                 while ($text = array_shift($texts)) {
-                    $pdf->Text($x + $size + $def['label_padding'], $y, $text);
+                    $pdf->Text($x + $size + $def['label_padding'], $y + $def['label_padding'], $text);
                     $y += $this->point_to_mm($fontsize);
                 }
 
